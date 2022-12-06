@@ -1,11 +1,10 @@
 package ru.job4j.tracker;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-
 import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrackerTest {
     @Test
@@ -17,6 +16,16 @@ public class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
+
+    @Test
+    public void whenTestFindById() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        Item item = tracker.add(bug);
+        Item result = tracker.findById(item.getId());
+        assertThat(result.getName()).isEqualTo(item.getName());
+    }
+
     @Test
     public void whenTestFindAll() {
         Tracker tracker = new Tracker();
@@ -25,7 +34,7 @@ public class TrackerTest {
         tracker.add(first);
         tracker.add(second);
         Item result = tracker.findAll()[0];
-        assertThat(result.getName(), is(first.getName()));
+        assertThat(result.getName()).isEqualTo(first.getName());
     }
 
     @Test
@@ -39,7 +48,7 @@ public class TrackerTest {
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
         Item[] result = tracker.findByName(first.getName());
-        assertThat(result.length, is(3));
+        assertThat(result.length).isEqualTo(3);
     }
 
     @Test
@@ -53,6 +62,6 @@ public class TrackerTest {
         tracker.add(new Item("Second"));
         tracker.add(new Item("First"));
         Item[] result = tracker.findByName(second.getName());
-        assertThat(result[1].getName(), is(second.getName()));
+        assertThat(result[1].getName()).isEqualTo(second.getName());
     }
 }
