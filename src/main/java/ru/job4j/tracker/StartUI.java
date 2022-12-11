@@ -15,7 +15,16 @@ public class StartUI {
                 String name = scanner.nextLine();
                 Item item = new Item(name);
                 tracker.add(item);
-                System.out.println("Добавленная заявка: " + item);
+                System.out.println("Added application: " + item);
+            } else if (select == 1) {
+                Item[] items = tracker.findAll();
+                if (items.length > 0) {
+                    for (Item el : items) {
+                        System.out.println(el);
+                    }
+                } else {
+                    System.out.println("Not found applications in tracker");
+                }
             } else if (select == 6) {
                 run = false;
             }
