@@ -56,6 +56,18 @@ public class StartUI {
                 } else {
                     System.out.println("Error by find application by id");
                 }
+            } else if (select == 5) {
+                System.out.println("=== Find item by name ===");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item[] items = tracker.findByName(name);
+                if (items.length > 0) {
+                    for (Item el : items) {
+                        System.out.println(el);
+                    }
+                } else {
+                    System.out.println("Error by find application by name");
+                }
             } else if (select == 6) {
                 run = false;
             }
