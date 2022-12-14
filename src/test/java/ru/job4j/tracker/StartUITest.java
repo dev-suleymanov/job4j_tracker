@@ -42,6 +42,5 @@ public class StartUITest {
         StartUI.editItem(new StubInput(answers), tracker);
         Item edited = tracker.findById(item.getId());
         assertThat(edited.getName()).isEqualTo("null");
-
     }
 }
