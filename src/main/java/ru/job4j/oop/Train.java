@@ -3,6 +3,6 @@ package ru.job4j.oop;
 public class Train implements Vehicle {
     @Override
     public void move() {
-        System.out.println("Rides in the rails");
+        System.out.println(getClass().getSimpleName() + " rides in the rails");
     }
 }
