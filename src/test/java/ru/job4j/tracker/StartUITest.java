@@ -36,11 +36,10 @@ public class StartUITest {
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {
-                String.valueOf(item.getId()),
-                "null"
+                String.valueOf(item.getId())
         };
-        StartUI.editItem(new StubInput(answers), tracker);
+        StartUI.deleteItem(new StubInput(answers), tracker);
         Item edited = tracker.findById(item.getId());
-        assertThat(edited.getName()).isEqualTo("null");
+        assertThat(edited).isNull();
     }
 }
