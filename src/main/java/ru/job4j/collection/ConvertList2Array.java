@@ -6,12 +6,12 @@ public class ConvertList2Array {
     public static int[][] toArray(List<Integer> list, int cells) {
         int groups = (int) Math.ceil((double) list.size() / cells);
         int[][] result = new int[groups][cells];
-        int length = 0;
-        for (int i = 0; i < result.length; i++) {
-            for (int j = 0; j < result[i].length; j++) {
-                if (length < list.size()) {
-                    result[i][j] = list.get(length++);
-                }
+        int row = 0, cell = 0;
+        for (Integer num : list) {
+            result[row][cell++] = num;
+            if (cell == cells) {
+                row++;
+                cell = 0;
             }
         }
         return result;
