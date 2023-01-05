@@ -15,7 +15,6 @@ public class PhoneDictionary {
             if (el.getName().contains(key) || el.getSurname().contains(key)
                     || el.getPhone().contains(key) || el.getAddress().contains(key)) {
                 result.add(el);
-                break;
             }
         }
         return result;
