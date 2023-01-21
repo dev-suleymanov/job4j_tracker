@@ -1,21 +1,22 @@
 package ru.job4j.collection;
 
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UniqueTextTest {
     @Test
-    public void IsEquals() {
+    public void isEquals() {
+        UniqueText uniqueText = new UniqueText();
         String origin = "My cat eats a mouse";
-        String duplicate = "My cat eats a mouse";
-        assertThat(new UniqueText().isEquals(origin, duplicate)).isTrue();
+        String text = "My cat eats a mouse";
+        assertThat(uniqueText.isEquals(origin, text)).isTrue();
     }
 
     @Test
-    public void IsNotEquals() {
+    public void isNotEquals() {
+        UniqueText uniqueText = new UniqueText();
         String origin = "My cat eats a mouse";
-        String duplicate = "A mouse is eaten by a cat";
-        assertThat(new UniqueText().isEquals(origin, duplicate)).isFalse();
+        String text = "A mouse is eaten by a cat";
+        assertThat(uniqueText.isEquals(origin, text)).isFalse();
     }
 }
