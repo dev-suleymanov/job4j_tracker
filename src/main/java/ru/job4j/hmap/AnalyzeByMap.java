@@ -39,7 +39,7 @@ public class AnalyzeByMap {
         for (Pupil el : pupils) {
             labels.add(new Label(el.name(), scoreByIndividualPupil(el)));
         }
-        Collections.sort(labels, Comparator.naturalOrder());
+        labels.sort(Comparator.naturalOrder());
         return labels.size() == 0 ? null : labels.get(labels.size() - 1);
     }
 
@@ -54,7 +54,7 @@ public class AnalyzeByMap {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             labels.add(new Label(entry.getKey(), entry.getValue()));
         }
-        Collections.sort(labels, Comparator.naturalOrder());
+        labels.sort(Comparator.naturalOrder());
         return labels.size() == 0 ? null : labels.get(labels.size() - 1);
     }
 
