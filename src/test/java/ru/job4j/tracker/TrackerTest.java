@@ -106,4 +106,114 @@ public class TrackerTest {
         assertThat(tracker.findById(item.getId()).getName()).isEqualTo("Bug");
         assertThat(result).isFalse();
     }
+    @Test
+    public void whenReplaceItemTestOutputIsSuccessfully() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        String replaceName = "New Test Name";
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new EditAction(out),
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        one.setName("New Test Name");
+        assertThat(out.toString()).isEqualTo(
+                "Menu." + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit" + ln
+                        + "=== Edit item ===" + ln
+                        + "Replace application: " + one + ln
+                        + "Menu." + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit" + ln
+                        + "The tracker successful closed" + ln
+        );
+    }
+
+    @Test
+    public void whenFindAllAction() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item first = tracker.add(new Item("test1"));
+        Item second = tracker.add(new Item("test2"));
+        Input in = new StubInput(
+                new String[] {"0", "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new ShowAction(out),
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString()).isEqualTo(
+                "Menu." + ln
+                        + "0. Show all items" + ln
+                        + "1. Exit" + ln
+                        + first + ln
+                        + second + ln
+                        + "Menu." + ln
+                        + "0. Show all items" + ln
+                        + "1. Exit" + ln
+                        + "The tracker successful closed" + ln
+        );
+    }
+
+    @Test
+    public void whenFindByNameAction() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        Input in = new StubInput(
+                new String[] {"0", "test1", "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindByNameAction(out),
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString()).isEqualTo(
+                "Menu." + ln
+                        + "0. Find items by name" + ln
+                        + "1. Exit" + ln
+                        + "=== Find item by name ===" + ln
+                        + one + ln
+                        + "Menu." + ln
+                        + "0. Find items by name" + ln
+                        + "1. Exit" + ln
+                        + "The tracker successful closed" + ln
+        );
+    }
+
+    @Test
+    public void FindByIdAction() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(one.getId()), "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindByIdAction(out),
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString()).isEqualTo(
+                "Menu." + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit" + ln
+                        + "=== Find item by id ===" + ln
+                        + one + ln
+                        + "Menu." + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit" + ln
+                        + "The tracker successful closed" + ln
+        );
+    }
 }
