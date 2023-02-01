@@ -192,7 +192,7 @@ public class TrackerTest {
     }
 
     @Test
-    public void FindByIdAction() {
+    public void whenFindByIdAction() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
         Item one = tracker.add(new Item("test"));
