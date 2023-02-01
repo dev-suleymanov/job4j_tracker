@@ -71,4 +71,26 @@ public class StartUITest {
                         + "The tracker successful closed" + ln
         );
     }
+
+    @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"1", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = new UserAction[]{
+                new Exit(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString()).isEqualTo(
+                "Menu." + ln
+                        + "0. Exit" + ln
+                        + "Wrong input, you can select: 0 .. " + (actions.length - 1) + ln
+                        + "Menu." + ln
+                        + "0. Exit" + ln
+                        + "The tracker successful closed" + ln
+        );
+    }
 }
