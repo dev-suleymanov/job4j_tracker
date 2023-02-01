@@ -168,9 +168,9 @@ public class TrackerTest {
     public void whenFindByNameAction() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        Item one = tracker.add(new Item("test1"));
+        Item one = tracker.add(new Item("test"));
         Input in = new StubInput(
-                new String[]{"0", "test1", "1"}
+                new String[]{"0", "test", "1"}
         );
         UserAction[] actions = new UserAction[]{
                 new FindByNameAction(out),
@@ -195,7 +195,7 @@ public class TrackerTest {
     public void FindByIdAction() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        Item one = tracker.add(new Item("test1"));
+        Item one = tracker.add(new Item("test"));
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(one.getId()), "1"}
         );
