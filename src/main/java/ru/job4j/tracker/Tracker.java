@@ -30,24 +30,18 @@ public class Tracker {
         return index != -1 ? items.get(index) : null;
     }
 
-    public Item[] findAll() {
-        Item[] result = new Item[items.size()];
-        int length = 0;
-        for (Item el : items) {
-            result[length++] = el;
-        }
-        return result;
+    public List<Item> findAll() {
+        return List.copyOf(items);
     }
 
-    public Item[] findByName(String key) {
-        Item[] result = new Item[items.size()];
-        int length = 0;
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item el : items) {
             if (el.getName().equals(key)) {
-                result[length++] = el;
+                result.add(el);
             }
         }
-        return Arrays.copyOf(result, length);
+        return result;
     }
 
     public boolean replace(int id, Item item) {
@@ -55,8 +49,7 @@ public class Tracker {
         boolean result = index != -1;
         if (result) {
             item.setId(id);
-            items.remove(index);
-            items.add(item);
+            items.set(index, item);
         }
         return result;
     }
