@@ -27,8 +27,8 @@ public class FunctionCalculatorTest {
     @Test
     public void whenLevelFunctionThenLevelResults() {
         FunctionCalculator function = new FunctionCalculator();
-        List<Double> result = function.diapason(0, 3, x -> Math.pow(x, 3) + 2);
-        List<Double> expected = Arrays.asList(2D, 3D, 10D);
+        List<Double> result = function.diapason(0, 3, x -> Math.pow(3, x) + 2);
+        List<Double> expected = Arrays.asList(3D, 5D, 11D);
         assertThat(result).containsAll(expected);
     }
 }
