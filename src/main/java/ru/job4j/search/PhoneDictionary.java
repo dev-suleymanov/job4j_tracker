@@ -17,22 +17,11 @@ public class PhoneDictionary {
         Predicate<Person> address = str -> str.getAddress().contains(key);
         Predicate<Person> combine = name.or(surname).or(phone).or(address);
         ArrayList<Person> result = new ArrayList<>();
-        for (Person el : persons) {
+        for (var el : persons) {
             if (combine.test(el)) {
                 result.add(el);
             }
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        PhoneDictionary phones = new PhoneDictionary();
-        phones.add(
-                new Person("Petr", "Arsentev", "534872", "Bryansk")
-        );
-        ArrayList<Person> persons = phones.find("Oleg");
-        for (Person el : persons) {
-            System.out.println(el.getName());
-        }
     }
 }
