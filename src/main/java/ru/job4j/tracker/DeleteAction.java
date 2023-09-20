@@ -17,7 +17,10 @@ public class DeleteAction implements UserAction {
     public boolean execute(Input input, Store tracker) {
         out.println("=== Delete item ===");
         int id = input.askInt("Enter id: ");
-        if (tracker.delete(id)) {
+        SqlTracker sqlTracker = new SqlTracker();
+        Item item = sqlTracker.findById(id);
+        if (item != null) {
+            sqlTracker.delete(id);
             out.println("The application successfully deleted");
         } else {
             out.println("Error by delete application");
