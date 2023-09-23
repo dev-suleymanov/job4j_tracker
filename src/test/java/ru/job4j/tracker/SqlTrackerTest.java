@@ -53,8 +53,8 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        tracker.add(item);
-        assertThat(tracker.findById(item.getId())).isEqualTo(item);
+        Item item1 = new Item("item");
+        tracker.add(item1);
+        assertThat(tracker.findById(item1.getId())).isEqualTo(item1);
     }
 }
