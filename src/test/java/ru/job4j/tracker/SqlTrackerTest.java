@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.*;
@@ -46,12 +48,68 @@ public class SqlTrackerTest {
         }
     }
 
-    @Disabled
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
         Item item = new Item("item");
         tracker.add(item);
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
+    }
+
+    @Test
+    public void whenFindBiId() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item first = new Item("first");
+        Item second = new Item("second");
+        tracker.add(first);
+        tracker.add(second);
+        assertThat(tracker.findById(first.getId()))
+                .isEqualTo(first);
+    }
+
+    @Test
+    public void whenReplace() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        Item newItem = new Item("newItem");
+        tracker.replace(item.getId(), newItem);
+        assertThat(tracker.findById(item.getId()).getName()).
+                isEqualTo("newItem");
+    }
+
+    @Test
+    public void whenDelete() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        tracker.delete(item.getId());
+        assertThat(tracker.findById(item.getId())).isNull();
+    }
+
+    @Test
+    public void whenFindAll() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item first = new Item("first");
+        Item second = new Item("second");
+        Item third = new Item("third");
+        tracker.add(first);
+        tracker.add(second);
+        tracker.add(third);
+        assertThat(tracker.findAll()).
+                isEqualTo(new ArrayList<>(List.of(first, second, third)));
+    }
+
+    @Test
+    public void whenFindByName() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item first = new Item("first");
+        Item second = new Item("second");
+        Item third = new Item("first");
+        tracker.add(first);
+        tracker.add(second);
+        tracker.add(third);
+        assertThat(tracker.findByName("first"))
+                .isEqualTo(new ArrayList<>(List.of(first, third)));
     }
 }
