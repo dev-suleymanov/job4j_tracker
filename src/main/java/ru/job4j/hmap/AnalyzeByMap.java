@@ -24,8 +24,8 @@ public class AnalyzeByMap {
         List<Label> result = new ArrayList<>();
         Map<String, Integer> map = new LinkedHashMap<>();
         for (Pupil el : pupils) {
-            for (Subject ell : el.subjects()) {
-                map.put(ell.name(), map.getOrDefault(ell.name(), 0) + ell.score());
+            for (Subject subject : el.subjects()) {
+                map.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -46,8 +46,8 @@ public class AnalyzeByMap {
     public static Label bestSubject(List<Pupil> pupils) {
         Map<String, Integer> map = new LinkedHashMap<>();
         for (Pupil el : pupils) {
-            for (Subject ell : el.subjects()) {
-                map.put(ell.name(), map.getOrDefault(ell.name(), 0) + ell.score());
+            for (Subject subject : el.subjects()) {
+                map.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
         List<Label> labels = new ArrayList<>();
